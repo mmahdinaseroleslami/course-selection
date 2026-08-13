@@ -8,9 +8,11 @@ venv/
 env/
 
 .git/
+.gitignore
 .idea/
 .vscode/
 
 Dockerfile*
 docker-compose*.yml
 README.md
+sample_requests.http
