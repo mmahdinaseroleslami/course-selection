@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>سیستم جامع انتخاب واحد دانشگاهی لرستان</title>
+  <link rel="stylesheet" href="/static/css/style.css" />
+</head>
+<body>
+  <div class="app-container">
+    <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
+    <aside class="sidebar" id="appSidebar">
+      <div class="sidebar-header">
+        <div class="university-logo">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+        </div>
+        <div class="university-info">
+          <h1>سامانه انتخاب واحد</h1>
+        </div>
+      </div>
+
+      <nav class="nav-menu" role="navigation" aria-label="منوی اصلی">
+        <div class="nav-item active" data-view="dashboard" role="button" tabindex="0" aria-label="داشبورد اصلی">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+          <span>داشبورد اصلی</span>
+        </div>
+        <div class="nav-item" data-view="students" role="button" tabindex="0" aria-label="مدیریت دانشجویان">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          <span>مدیریت دانشجویان</span>
+        </div>
+        <div class="nav-item" data-view="professors" role="button" tabindex="0" aria-label="مدیریت اساتید">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          <span>مدیریت اساتید</span>
+        </div>
+        <div class="nav-item" data-view="courses" role="button" tabindex="0" aria-label="مدیریت دروس">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+          <span>مدیریت دروس</span>
+        </div>
+        <div class="nav-item" data-view="selection" role="button" tabindex="0" aria-label="انتخاب واحد">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+          <span>انتخاب واحد</span>
+        </div>
+      </nav>
+    </aside>
+
+    <main class="main-wrapper">
+      <header class="topbar">
+        <div class="topbar-right">
+          <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="باز و بستن منوی ناوبری">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+          </button>
+          <h2 class="page-title" id="pageTitleText">داشبورد اصلی</h2>
+        </div>
+        <div class="topbar-left">
+          <button class="theme-toggle-btn" id="themeToggleBtn" title="تغییر پوسته (روز / شب)" aria-label="تغییر پوسته (روز / شب)">
+            <svg id="themeIcon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+          </button>
+          <a href="https://github.com/mmahdinaseroleslami" target="_blank" rel="noopener noreferrer" class="user-badge" id="currentUserBadge" title="مشاهده پروفایل گیت‌هاب" style="text-decoration: none; color: inherit;">
+            <div class="user-avatar" id="userAvatarText">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
+              </svg>
+            </div>
+            <div>
+              <div style="font-size: 0.85rem; font-weight: 700;" id="userNameText">محمد مهدی ناصرالاسلامی</div>
+            </div>
+          </a>
+        </div>
+      </header>
+
+      <div class="content-area">
+
+        <section id="view-dashboard" class="view-section active">
+          <div class="stats-grid">
+            <div class="stat-card">
+              <div class="stat-icon students">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+              </div>
+              <div class="stat-details">
+                <h3>کل دانشجویان ثبت‌شده</h3>
+                <div class="stat-value" id="stat-students-count">0</div>
+              </div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-icon professors">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              </div>
+              <div class="stat-details">
+                <h3>کل اساتید فعال</h3>
+                <div class="stat-value" id="stat-professors-count">0</div>
+              </div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-icon courses">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+              </div>
+              <div class="stat-details">
+                <h3>دروس ارائه شده</h3>
+                <div class="stat-value" id="stat-courses-count">0</div>
+              </div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-icon enrollments">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+              </div>
+              <div class="stat-details">
+                <h3>کل اخذ واحدها</h3>
+                <div class="stat-value" id="stat-enrollments-count">0</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card-container">
+            <div class="card-header">
+              <h3 class="card-title">به سامانه انتخاب واحد دانشگاهی خوش آمدید.</h3>
+            </div>
+            <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.7;">
+              از طریق منوی سمت راست می‌توانید عملیات تعریف، ویرایش و انتخاب واحد را انجام دهید.
+            </p>
+          </div>
+
+          <div class="card-container">
+            <div class="card-header">
+              <h3 class="card-title">مشخصات پروژه دانشگاهی</h3>
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px;">
+              <div style="background: var(--topbar-bg); padding: 16px; border-radius: var(--radius-sm); border: 1px solid var(--border-color);">
+                <span style="font-size: 0.8rem; color: var(--text-secondary); display: block; margin-bottom: 4px;">طراحی و توسعه</span>
+                <strong style="font-size: 0.95rem; color: var(--text-primary);">محمد مهدی ناصرالاسلامی</strong>
+              </div>
+              <div style="background: var(--topbar-bg); padding: 16px; border-radius: var(--radius-sm); border: 1px solid var(--border-color);">
+                <span style="font-size: 0.8rem; color: var(--text-secondary); display: block; margin-bottom: 4px;">استاد راهنما</span>
+                <strong style="font-size: 0.95rem; color: var(--text-primary);">دکتر آرمین رشنو</strong>
+              </div>
+              <div style="background: var(--topbar-bg); padding: 16px; border-radius: var(--radius-sm); border: 1px solid var(--border-color);">
+                <span style="font-size: 0.8rem; color: var(--text-secondary); display: block; margin-bottom: 4px;">دانشگاه</span>
+                <strong style="font-size: 0.95rem; color: var(--text-primary);">دانشگاه لرستان — مهندسی کامپیوتر</strong>
+              </div>
+              <div style="background: var(--topbar-bg); padding: 16px; border-radius: var(--radius-sm); border: 1px solid var(--border-color);">
+                <span style="font-size: 0.8rem; color: var(--text-secondary); display: block; margin-bottom: 4px;">عنوان درس</span>
+                <strong style="font-size: 0.95rem; color: var(--text-primary);">برنامه نویسی پیشرفته</strong>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="view-students" class="view-section">
+          <div class="card-container">
+            <div class="card-header">
+              <h3 class="card-title">لیست دانشجویان</h3>
+              <div class="header-actions">
+                <div class="search-box">
+                  <input type="text" id="studentSearchInput" placeholder="جستجو نام یا شماره دانشجویی..." aria-label="جستجو در لیست دانشجویان" />
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                </div>
+                <button class="btn btn-primary" id="btnOpenAddStudentModal">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                  افزودن دانشجوی جدید
+                </button>
+              </div>
+            </div>
+
+            <div class="table-responsive">
+              <table id="studentsTable">
+                <thead>
+                  <tr>
+                    <th>نام و نام خانوادگی</th>
+                    <th>شماره دانشجویی</th>
+                    <th>رشته تحصیلی</th>
+                    <th>تعداد دروس اخذ شده</th>
+                    <th>عملیات</th>
+                  </tr>
+                </thead>
+                <tbody id="studentsTableBody">
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <section id="view-professors" class="view-section">
+          <div class="card-container">
+            <div class="card-header">
+              <h3 class="card-title">لیست اعضای هیئت علمی و اساتید</h3>
+              <div class="header-actions">
+                <div class="search-box">
+                  <input type="text" id="profSearchInput" placeholder="جستجو استاد یا کد پرسنلی..." aria-label="جستجو در لیست اساتید" />
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                </div>
+                <button class="btn btn-primary" id="btnOpenAddProfModal">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                  افزودن استاد جدید
+                </button>
+              </div>
+            </div>
+
+            <div class="table-responsive">
+              <table id="professorsTable">
+                <thead>
+                  <tr>
+                    <th>نام و نام خانوادگی</th>
+                    <th>کد پرسنلی</th>
+                    <th>دانشکده</th>
+                    <th>دروس ارائه شده</th>
+                    <th>عملیات</th>
+                  </tr>
+                </thead>
+                <tbody id="professorsTableBody">
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <section id="view-courses" class="view-section">
+          <div class="card-container">
+            <div class="card-header">
+              <h3 class="card-title">لیست دروس ارائه شده</h3>
+              <div class="header-actions">
+                <div class="search-box">
+                  <input type="text" id="courseSearchInput" placeholder="جستجو کد یا عنوان درس..." aria-label="جستجو در لیست دروس" />
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                </div>
+                <button class="btn btn-primary" id="btnOpenAddCourseModal">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                  افزودن درس جدید
+                </button>
+              </div>
+            </div>
+
+            <div class="table-responsive">
+              <table id="coursesTable">
+                <thead>
+                  <tr>
+                    <th>کد درس</th>
+                    <th>عنوان درس</th>
+                    <th>تعداد واحد</th>
+                    <th>ظرفیت کل / ثبت‌نامی</th>
+                    <th>رشته ارائه دهنده</th>
+                    <th>استاد مدرس</th>
+                    <th>عملیات</th>
+                  </tr>
+                </thead>
+                <tbody id="coursesTableBody">
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <section id="view-selection" class="view-section">
+          <div class="card-container">
+            <div class="card-header">
+              <h3 class="card-title">انتخاب واحد</h3>
+            </div>
+
+            <div class="form-group" style="max-width: 400px; margin-bottom: 24px;">
+              <label class="form-label" for="selectStudentForCourse">انتخاب دانشجو جهت شروع فرایند:</label>
+              <select id="selectStudentForCourse" class="form-control">
+                <option value="">-- لطفاً یک دانشجو انتخاب کنید --</option>
+              </select>
+            </div>
+
+            <div id="selectionWorkspaceContainer" style="display: none;">
+              <div style="background: var(--primary-light); border: 1px solid var(--primary); padding: 16px; border-radius: var(--radius-sm); margin-bottom: 24px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;">
+                <div>
+                  <h4 id="activeStudentName" style="font-size: 1.05rem; font-weight: 700; color: var(--primary);"></h4>
+                  <p id="activeStudentInfo" style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 4px;"></p>
+                </div>
+                <div>
+                  <span class="badge badge-primary" id="activeStudentTotalUnits" style="font-size: 0.9rem; padding: 6px 14px;">مجموع واحدها: ۰</span>
+                </div>
+              </div>
+
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px;">
+                <div>
+                  <h4 style="font-size: 1rem; font-weight: 700; margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
+                    <span style="color: var(--success);">✓</span> دروس اخذ شده دانشجو
+                  </h4>
+                  <div class="table-responsive">
+                    <table>
+                      <thead>
+                        <tr>
+                          <th>کد</th>
+                          <th>عنوان درس</th>
+                          <th>واحد</th>
+                          <th>حذف</th>
+                        </tr>
+                      </thead>
+                      <tbody id="studentSelectedCoursesBody">
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+
+                <div>
+                  <h4 style="font-size: 1rem; font-weight: 700; margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
+                    <span style="color: var(--primary);">+</span> لیست دروس قابل اخذ
+                  </h4>
+                  <div class="table-responsive">
+                    <table>
+                      <thead>
+                        <tr>
+                          <th>کد</th>
+                          <th>عنوان درس</th>
+                          <th>ظرفیت</th>
+                          <th>اخذ درس</th>
+                        </tr>
+                      </thead>
+                      <tbody id="availableCoursesBody">
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="view-404" class="view-section">
+          <div class="card-container" style="text-align: center; padding: 60px 24px;">
+            <div class="empty-state">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M16 16s-1.5-2-4-2-4 2-4 2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
+              <h4 style="font-size: 1.5rem; margin-bottom: 10px;">صفحه مورد نظر یافت نشد (خطای ۴۰۴)</h4>
+              <p style="margin-bottom: 24px;">صفحه‌ای که به دنبال آن هستید وجود ندارد یا منتقل شده است.</p>
+              <button class="btn btn-primary" id="btnGoHomeFrom404">بازگشت به داشبورد اصلی</button>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </main>
+  </div>
+
+  <div class="modal-backdrop" id="studentModal" role="dialog" aria-modal="true" aria-labelledby="studentModalTitle">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3 class="modal-title" id="studentModalTitle">افزودن دانشجوی جدید</h3>
+        <button class="close-btn" data-close-modal="studentModal" aria-label="بستن پنجره">&times;</button>
+      </div>
+      <form id="studentForm">
+        <input type="hidden" id="studentEditOriginalId" />
+        <div class="form-group">
+          <label class="form-label" for="student_first_name">نام *</label>
+          <input type="text" id="student_first_name" class="form-control" required minlength="2" maxlength="50" placeholder="مثال: علی" />
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="student_last_name">نام خانوادگی *</label>
+          <input type="text" id="student_last_name" class="form-control" required minlength="2" maxlength="50" placeholder="مثال: حسینی" />
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="student_number">شماره دانشجویی *</label>
+          <input type="text" id="student_number" class="form-control" required minlength="3" maxlength="20" pattern="\S+" title="شماره دانشجویی را بدون فاصله وارد کنید. (فقط حروف، اعداد)" placeholder="مثال: 991001" />
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="student_major">رشته تحصیلی *</label>
+          <input type="text" id="student_major" class="form-control" required minlength="2" maxlength="80" placeholder="مثال: مهندسی کامپیوتر" />
+        </div>
+        <div class="form-actions">
+          <button type="button" class="btn btn-secondary" data-close-modal="studentModal">انصراف</button>
+          <button type="submit" class="btn btn-primary">ذخیره اطلاعات</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="modal-backdrop" id="professorModal" role="dialog" aria-modal="true" aria-labelledby="profModalTitle">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3 class="modal-title" id="profModalTitle">افزودن استاد جدید</h3>
+        <button class="close-btn" data-close-modal="professorModal" aria-label="بستن پنجره">&times;</button>
+      </div>
+      <form id="professorForm">
+        <input type="hidden" id="profEditOriginalCode" />
+        <div class="form-group">
+          <label class="form-label" for="prof_first_name">نام *</label>
+          <input type="text" id="prof_first_name" class="form-control" required minlength="2" maxlength="50" placeholder="مثال: آرمین" />
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="prof_last_name">نام خانوادگی *</label>
+          <input type="text" id="prof_last_name" class="form-control" required minlength="2" maxlength="50" placeholder="مثال: رشنو" />
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="prof_personnel_code">کد پرسنلی *</label>
+          <input type="text" id="prof_personnel_code" class="form-control" required minlength="3" maxlength="20" pattern="\S+" title="کد پرسنلی را بدون فاصله وارد کنید. (فقط حروف، اعداد)" placeholder="مثال: P101" />
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="prof_department">دانشکده *</label>
+          <input type="text" id="prof_department" class="form-control" required minlength="2" maxlength="80" placeholder="مثال: مهندسی کامپیوتر" />
+        </div>
+        <div class="form-actions">
+          <button type="button" class="btn btn-secondary" data-close-modal="professorModal">انصراف</button>
+          <button type="submit" class="btn btn-primary">ذخیره اطلاعات</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="modal-backdrop" id="courseModal" role="dialog" aria-modal="true" aria-labelledby="courseModalTitle">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3 class="modal-title" id="courseModalTitle">افزودن درس جدید</h3>
+        <button class="close-btn" data-close-modal="courseModal" aria-label="بستن پنجره">&times;</button>
+      </div>
+      <form id="courseForm">
+        <input type="hidden" id="courseEditOriginalCode" />
+        <div class="form-group">
+          <label class="form-label" for="course_code">کد درس *</label>
+          <input type="text" id="course_code" class="form-control" required minlength="2" maxlength="20" pattern="\S+" title="کد درس را بدون فاصله وارد کنید. (فقط حروف، اعداد)" placeholder="مثال: CS101" />
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="course_title">عنوان درس *</label>
+          <input type="text" id="course_title" class="form-control" required minlength="2" maxlength="100" placeholder="مثال: برنامه‌نویسی پیشرفته" />
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="course_unit">تعداد واحد (۱ تا ۵) *</label>
+          <input type="number" id="course_unit" class="form-control" required min="1" max="5" value="3" />
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="course_capacity">ظرفیت درس (۱ تا ۲۰۰) *</label>
+          <input type="number" id="course_capacity" class="form-control" required min="1" max="200" value="30" />
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="course_major">رشته ارائه دهنده *</label>
+          <input type="text" id="course_major" class="form-control" required minlength="2" maxlength="80" placeholder="مثال: مهندسی کامپیوتر" />
+        </div>
+        <div class="form-actions">
+          <button type="button" class="btn btn-secondary" data-close-modal="courseModal">انصراف</button>
+          <button type="submit" class="btn btn-primary">ذخیره اطلاعات</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="modal-backdrop" id="assignProfModal" role="dialog" aria-modal="true" aria-label="تخصیص استاد به درس">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3 class="modal-title">تخصیص استاد به درس</h3>
+        <button class="close-btn" data-close-modal="assignProfModal" aria-label="بستن پنجره">&times;</button>
+      </div>
+      <form id="assignProfForm">
+        <input type="hidden" id="assignCourseCode" />
+        <div class="form-group">
+          <label class="form-label">عنوان درس:</label>
+          <div id="assignCourseTitle" style="font-weight: 700; color: var(--primary);"></div>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="selectProfForAssign">انتخاب استاد مدرس:</label>
+          <select id="selectProfForAssign" class="form-control" required>
+            <option value="">-- لطفاً یک استاد انتخاب کنید --</option>
+          </select>
+        </div>
+        <div class="form-actions">
+          <button type="button" class="btn btn-secondary" data-close-modal="assignProfModal">انصراف</button>
+          <button type="submit" class="btn btn-primary">ثبت تخصیص</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="modal-backdrop" id="replaceProfModal" role="dialog" aria-modal="true" aria-label="تعویض استاد درس">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3 class="modal-title">تعویض استاد درس</h3>
+        <button class="close-btn" data-close-modal="replaceProfModal" aria-label="بستن پنجره">&times;</button>
+      </div>
+      <form id="replaceProfForm">
+        <input type="hidden" id="replaceCourseCode" />
+        <div class="form-group">
+          <label class="form-label">عنوان درس:</label>
+          <div id="replaceCourseTitle" style="font-weight: 700; color: var(--primary);"></div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">استاد فعلی:</label>
+          <div id="replaceCurrentProf" style="font-weight: 700; color: var(--danger, #ef4444);"></div>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="selectProfForReplace">انتخاب استاد جدید:</label>
+          <select id="selectProfForReplace" class="form-control" required>
+            <option value="">-- لطفاً یک استاد انتخاب کنید --</option>
+          </select>
+        </div>
+        <div class="form-actions">
+          <button type="button" class="btn btn-secondary" data-close-modal="replaceProfModal">انصراف</button>
+          <button type="submit" class="btn btn-warning btn-sm" style="background: #f59e0b; color: #fff; border: none; padding: 10px 20px; font-weight: 700;">ثبت تعویض</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="modal-backdrop" id="studentDetailsModal" role="dialog" aria-modal="true" aria-label="جزئیات پرونده دانشجو">
+    <div class="modal-box" style="max-width: 580px;">
+      <div class="modal-header">
+        <h3 class="modal-title">جزئیات کامل پرونده دانشجو</h3>
+        <button class="close-btn" data-close-modal="studentDetailsModal" aria-label="بستن پنجره">&times;</button>
+      </div>
+      <div id="studentDetailsContent">
+      </div>
+      <div class="form-actions">
+        <button class="btn btn-secondary" data-close-modal="studentDetailsModal">بستن پنجره</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-backdrop" id="profDetailsModal" role="dialog" aria-modal="true" aria-label="جزئیات پرونده استاد">
+    <div class="modal-box" style="max-width: 580px;">
+      <div class="modal-header">
+        <h3 class="modal-title">جزئیات پرونده استاد</h3>
+        <button class="close-btn" data-close-modal="profDetailsModal" aria-label="بستن پنجره">&times;</button>
+      </div>
+      <div id="profDetailsContent">
+      </div>
+      <div class="form-actions">
+        <button class="btn btn-secondary" data-close-modal="profDetailsModal">بستن پنجره</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-backdrop" id="courseDetailsModal" role="dialog" aria-modal="true" aria-label="جزئیات مشخصات درس">
+    <div class="modal-box" style="max-width: 580px;">
+      <div class="modal-header">
+        <h3 class="modal-title">جزئیات مشخصات درس</h3>
+        <button class="close-btn" data-close-modal="courseDetailsModal" aria-label="بستن پنجره">&times;</button>
+      </div>
+      <div id="courseDetailsContent">
+      </div>
+      <div class="form-actions">
+        <button class="btn btn-secondary" data-close-modal="courseDetailsModal">بستن پنجره</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-backdrop" id="confirmModal" role="dialog" aria-modal="true" aria-labelledby="confirmModalTitle">
+    <div class="modal-box" style="max-width: 440px;">
+      <div class="modal-header">
+        <h3 class="modal-title" id="confirmModalTitle">تایید عملیات</h3>
+        <button class="close-btn" id="btnCancelConfirm" aria-label="بستن پنجره">&times;</button>
+      </div>
+      <div style="padding: 12px 0 20px; font-size: 0.95rem; color: var(--text-secondary); line-height: 1.6;" id="confirmModalBody">
+        آیا از انجام این عملیات اطمینان دارید؟
+      </div>
+      <div class="form-actions">
+        <button class="btn btn-secondary" id="btnCancelConfirmAction">انصراف</button>
+        <button class="btn btn-danger" id="btnOkConfirmAction">بله، تایید می‌کنم</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast-container" id="toastContainer" aria-live="polite"></div>
+
+  <script src="/static/js/app.js"></script>
+</body>
+</html>
